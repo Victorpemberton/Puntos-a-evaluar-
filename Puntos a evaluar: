@@ -1,0 +1,37 @@
+def solicitar_datos_estudiante():
+    nombre = input("Enter student name: ")
+    matricula = input("Enter the student's registration: ")
+
+    notas = []
+    for i in range(1, 5):
+        while True:
+            try:
+                nota = float(input(f"Enter the note {i}: "))
+                if nota < 0:
+                    print("The note cannot be negative. Try again.")
+                else:
+                    notas.append(nota)
+                    break
+            except ValueError:
+                print("Unvalid entry. Please enter a number.")
+
+    promedio = sum(notas) / len(notas)
+    return nombre, matricula, promedio
+
+def main():
+    estudiantes = []
+
+    while True:
+        nombre, matricula, promedio = solicitar_datos_estudiante()
+        estudiantes.append((nombre, matricula, promedio))
+
+        continuar = input("¿Would you like to enroll another student?? (s/n): ").lower()
+        if continuar != 's':
+            break
+
+    print("\nStudent Averages:")
+    for nombre, matricula, promedio in estudiantes:
+        print(f"student: {nombre}, Matrícula: {matricula}, Promedio: {promedio:.2f}")
+
+if __name__ == "__main__":
+    main()
